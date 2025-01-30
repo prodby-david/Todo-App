@@ -50,7 +50,7 @@ const TodoNav = () => {
     <div className={`fixed flex flex-col gap-3 h-full w-[300px] bg-darkmode-bg ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-500 z-50 dark:shadow-lg`}>
 
       <div className='absolute top-5 right-8 text-white text-lg'>
-        <DarkModeToggle />f
+        <DarkModeToggle />
       </div>
 
         <div className='flex flex-col items-center mt-[70px]'>
