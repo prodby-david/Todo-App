@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +13,22 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
         email: '',
         password: ''
     });
+
+    const [rememberCheckbox, setRememberCheckbox] = useState(false);
+
+    useEffect(() => {
+      const savedEmail = localStorage.getItem('email');
+      const savedPassword = localStorage.getItem('password');
+      
+      if (savedEmail && savedPassword) {
+        setFormData({ email: savedEmail, password: savedPassword });
+        setRememberCheckbox(true); 
+      }
+    }, []);
+
+    const handleCheckbox = (e) => {
+      setRememberCheckbox(e.target.checked); 
+    };
 
     const { Login: setUser } = useAuthContext();
 
@@ -34,6 +50,14 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
     const handleSubmit = async (e) => {
 
       e.preventDefault();
+
+      if (rememberCheckbox) {
+        localStorage.setItem('email', formData.email);
+        localStorage.setItem('password', formData.password); 
+      } else {
+        localStorage.removeItem('email');
+        localStorage.removeItem('password');
+      }
 
       if (!formData.email || !formData.password) {
         setError('Both fields are required');
@@ -139,7 +163,7 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
                   <input type="text"
                   name='email'
                   id='email'
-                  value={formData.email}
+                  value={formData.email || ''}
                   onChange={handleChange}
                   className={`w-full max-w-lg text-xs md:text-sm xl:text-md mt-2 py-2 pl-2 outline-none border rounded-lg focus:border-accent-color dark:bg-darkmode-bg dark:border-darkmode-content-color dark:text-white dark:focus:border-accent-color 2xl:max-w-2xl ${emailError ? 'border-red-500' : ''}`} />
               </div>
@@ -153,7 +177,7 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
                   <input type="password"
                   name='password'
                   id='password'
-                  value={formData.password}
+                  value={formData.password || ''}
                   onChange={handleChange}
                   className={`w-full max-w-lg text-xs md:text-sm xl:text-md mt-2 py-2 pl-2 outline-none border rounded-lg focus:border-accent-color dark:bg-darkmode-bg dark:border-darkmode-content-color dark:text-white dark:focus:border-accent-color 2xl:max-w-2xl ${passwordError ? 'border-red-500' : ''}`} />
               </div>
@@ -162,6 +186,8 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
                 <input type="checkbox"
                 name='remCheckbox'
                 id='remCheckbox'
+                checked={rememberCheckbox}
+                onChange={handleCheckbox}
                 className='mr-2 cursor-pointer' />
                 <label htmlFor="remCheckbox" className='text-sm'>Remember me</label>
               </div>
