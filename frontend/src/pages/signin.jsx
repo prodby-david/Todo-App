@@ -45,7 +45,6 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
       setEmailError('');
       setPasswordError('');
-      
     }
 
     const handleSubmit = async (e) => {
