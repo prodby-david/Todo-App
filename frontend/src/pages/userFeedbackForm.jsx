@@ -94,9 +94,10 @@ const UserFeedbackForm = () => {
               <textarea 
               name="comment" 
               id="comment"
+              maxLength={100}
               onChange={(e) => setComment(e.target.value)}
               placeholder='Enter your comments here...'
-              className='mt-2 py-2 pl-2 text-sm h-40 max-h-[320px] resize-none outline-none border rounded-lg focus:border-accent-color dark:bg-darkmode-bg dark:border-darkmode-content-color dark:text-white dark:focus:border-accent-color'
+              className='mt-2 py-2 pl-2 text-sm h-40 max-h-[300px] resize-none outline-none border rounded-lg focus:border-accent-color dark:bg-darkmode-bg dark:border-darkmode-content-color dark:text-white dark:focus:border-accent-color'
               >
               </textarea>
 
