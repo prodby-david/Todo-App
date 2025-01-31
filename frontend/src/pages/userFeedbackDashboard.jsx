@@ -2,19 +2,26 @@ import React, { useEffect, useState } from 'react';
 import Navigation from '../components/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 const UserFeedbackDashboard = () => {
+
   const [feedbacks, setFeedbacks] = useState([]);
 
-  {/* const clearFeedbacks = () => {
-    localStorage.removeItem('feedbacks');
-    setFeedbacks([]); 
-  };
-  */}
-
   useEffect(() => {
-    const storedFeedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
-    setFeedbacks(storedFeedbacks);
+
+    const fetchFeedbacks = async () => {
+
+      try {
+        const response = await axios.get('http://localhost:3500/api/feedback-dashboard', { withCredentials: true }); 
+        setFeedbacks(response.data);
+      } 
+      catch (error) {
+        console.error('Error fetching feedbacks:', error);
+      }
+    };
+
+    fetchFeedbacks();
   }, []);
 
   return (
@@ -34,7 +41,9 @@ const UserFeedbackDashboard = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-[100px]">
             {feedbacks.map((feedback, index) => (
               <div key={index} className="w-full max-w-lg border p-4 rounded-md shadow-sm">
-                <h3 className="text-lg font-semibold text-accent-color">{feedback.name}</h3>
+                <h3 className="text-lg font-semibold text-accent-color">
+                  {feedback.userId?.firstname} {feedback.userId?.lastname}
+                </h3>
                 <div className="flex mt-1">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <span
@@ -51,17 +60,7 @@ const UserFeedbackDashboard = () => {
           </div>
           )}
       </div>
-
-    {/*}  <button 
-  onClick={clearFeedbacks} 
-  className="mt-5 p-3 bg-red-500 text-white rounded-lg hover:bg-red-600"
->
-  Clear All Feedbacks
-</button>
-*/}
-
     
-      
     </div>
   );
 };

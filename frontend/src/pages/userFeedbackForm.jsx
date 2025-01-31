@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import TodoNav from '../components/todonav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 
 const UserFeedbackForm = () => {
@@ -12,34 +13,21 @@ const UserFeedbackForm = () => {
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
-
-   useEffect(() => {
-      const storedUser = JSON.parse(localStorage.getItem('user'));
-      if (storedUser) {
-        setUser(storedUser);
-      }
-    }, []);
-  
-
   const navigate = useNavigate();
 
-  const FeedbackClicked = (e) => {
+  const FeedbackClicked = async (e) => {
 
     e.preventDefault();
 
-    if (!comment || rating === 0) {
-      Swal.fire({
-        title: 'Submission failed',
-        text: 'All fields are required.',
-        icon: 'error',
-        confirmButtonText: 'OK',
-      });
-      return; 
-    }
+    try{
 
-    const feedbackList = JSON.parse(localStorage.getItem('feedbacks')) || [];
-    feedbackList.push({ name: `${user.firstname} ${user.lastname}`, rating, comment });
-    localStorage.setItem('feedbacks', JSON.stringify(feedbackList));
+      const response = await axios.post('http://localhost:3500/api/user-feedback-form', {rating, comment}, {withCredentials: true});  
+
+      console.log('Feedback submitted:', response.data);
+
+    }catch(error){
+      console.error(error);
+    }
 
     Swal.fire({
       title: 'Feedback submitted.',
@@ -67,7 +55,7 @@ const UserFeedbackForm = () => {
 
       <div className='mt-5 pb-2 border rounded-md w-full max-w-lg 2xl:max-w-2xl px-2 mx-auto dark:border-darkmode-bg' data-aos='fade-down' data-aos-duration='1700' data-aos-delay='1400'>
         
-          <form className="flex flex-col p-6 rounded-lg">
+          <form className="flex flex-col p-6 rounded-lg" onSubmit={FeedbackClicked}>
 
             <div className="flex flex-col mt-5">
               <label className="font-semibold text-sm text-accent-color">Rate Us</label>

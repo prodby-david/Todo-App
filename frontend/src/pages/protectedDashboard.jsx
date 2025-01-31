@@ -20,16 +20,13 @@ const ProtectedDashboard = () => {
       try {
 
         const response =  await axios.get('http://localhost:3500/api/dashboard', {withCredentials: true});
-        localStorage.setItem('todos', JSON.stringify(response.data.todos));
         setTodo(response.data.todos);
 
       }catch(err){
         console.log('Unexpected error.')
       }
     }
-
     fetchTodo();
-    
   }, []);
 
   
@@ -107,9 +104,7 @@ const ProtectedDashboard = () => {
           await axios.delete(`http://localhost:3500/api/dashboard/${taskId}`, {withCredentials: true});
 
           const updatedTodos = todo.filter((_, i) => i !== index);
-          
           setTodo(updatedTodos);
-          localStorage.setItem('todos', JSON.stringify(updatedTodos));
 
           Swal.fire({
             title: 'Task deleted successfully',

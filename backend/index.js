@@ -6,6 +6,7 @@ import signUpRouter from './routers/signupAuth.js';
 import signInRouter from './routers/signInAuth.js';
 import cookieParser from 'cookie-parser';
 import TodoRouter from './routers/todoRoute.js';
+import feedbackRouter from './routers/feedbackRoute.js';
 
 
 const app = express();
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(signUpRouter);
 app.use(signInRouter);
 app.use(TodoRouter);
+app.use(feedbackRouter);
 
 
 app.listen(process.env.PORT, () => {
