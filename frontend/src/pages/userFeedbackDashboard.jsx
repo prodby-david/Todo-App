@@ -55,6 +55,14 @@ const UserFeedbackDashboard = () => {
                   ))}
                 </div>
                 <p className="mt-2 break-words overflow-hidden text-ellipsis">{feedback.comment}</p>
+                {feedback.userId?._id === userId &&(
+                  <button
+                    className="text-accent-color mt-2"
+                    onClick={() => deleteFeedback(feedback._id)}
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
             ))}
           </div>
