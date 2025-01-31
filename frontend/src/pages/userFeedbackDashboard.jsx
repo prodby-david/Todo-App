@@ -4,6 +4,12 @@ import Navigation from '../components/navigation';
 const UserFeedbackDashboard = () => {
   const [feedbacks, setFeedbacks] = useState([]);
 
+  {/* const clearFeedbacks = () => {
+    localStorage.removeItem('feedbacks');
+    setFeedbacks([]); 
+  };
+  */}
+
   useEffect(() => {
     const storedFeedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
     setFeedbacks(storedFeedbacks);
@@ -18,7 +24,7 @@ const UserFeedbackDashboard = () => {
       <div className='flex flex-col items-center mt-[100px] px-5'>
 
       <h2 className="text-2xl font-bold my-2 text-accent-color">Feedbacks and Reviews</h2>
-      <p className='mb-3'>Take a look at the users feedback</p>
+      {feedbacks.length > 0 && <p className='mb-3'>Take a look at the users feedback</p>}
 
         {feedbacks.length === 0 ? (
           <p className='text-gray-500'>No feedback available.</p>
@@ -27,13 +33,31 @@ const UserFeedbackDashboard = () => {
             {feedbacks.map((feedback, index) => (
               <div key={index} className="w-full max-w-lg border p-4 rounded-md shadow-sm">
                 <h3 className="text-lg font-semibold text-accent-color">{feedback.name}</h3>
-                <p className="text-sm text-gray-500">{feedback.email}</p>
+                <div className="flex mt-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <span
+                      key={star}
+                      className={`text-2xl ${star <= feedback.rating ? "text-yellow-400" : "text-gray-300"}`}
+                    >
+                      ★
+                    </span>
+                  ))}
+                </div>
                 <p className="mt-2">{feedback.comment}</p>
               </div>
             ))}
           </div>
           )}
       </div>
+
+    {/*}  <button 
+  onClick={clearFeedbacks} 
+  className="mt-5 p-3 bg-red-500 text-white rounded-lg hover:bg-red-600"
+>
+  Clear All Feedbacks
+</button>
+*/}
+
     
       
     </div>

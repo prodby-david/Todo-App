@@ -73,7 +73,7 @@ const UserFeedbackForm = () => {
 
             <div className="flex flex-col mt-5">
               <label className="font-semibold text-sm text-accent-color">Rate Us</label>
-              <div className="flex mt-2">
+              <div className="flex gap-x-5 mt-2">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <span
                     key={star}
@@ -111,6 +111,8 @@ const UserFeedbackForm = () => {
           </div>
 
       </div>
+
+      
 
     </div>
     </>
