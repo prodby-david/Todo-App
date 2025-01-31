@@ -8,13 +8,16 @@ const UserFeedbackForm = () => {
 
   const [name, setName] = useState('');
   const [comment, setComment] = useState('');
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
+
   const navigate = useNavigate();
 
   const FeedbackClicked = (e) => {
 
     e.preventDefault();
 
-    if (!name || !comment) {
+    if (!name || !comment || rating === 0) {
       Swal.fire({
         title: 'Submission failed',
         text: 'All fields are required.',
@@ -25,7 +28,7 @@ const UserFeedbackForm = () => {
     }
 
     const feedbackList = JSON.parse(localStorage.getItem('feedbacks')) || [];
-    feedbackList.push({ name, comment });
+    feedbackList.push({ name, rating, comment });
     localStorage.setItem('feedbacks', JSON.stringify(feedbackList));
 
     Swal.fire({
@@ -67,6 +70,26 @@ const UserFeedbackForm = () => {
               className='text-sm mt-2 py-2 pl-2 outline-none border rounded-lg focus:border-accent-color dark:bg-darkmode-bg dark:border-darkmode-content-color dark:text-white dark:focus:border-accent-color'
               />
             </div>
+
+            <div className="flex flex-col mt-5">
+              <label className="font-semibold text-sm text-accent-color">Rate Us</label>
+              <div className="flex mt-2">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <span
+                    key={star}
+                    className={`cursor-pointer text-2xl ${
+                      (hover || rating) >= star ? "text-yellow-400" : "text-gray-300"
+                    }`}
+                    onClick={() => setRating(star)}
+                    onMouseEnter={() => setHover(star)}
+                    onMouseLeave={() => setHover(rating)}
+                  >
+                    ★
+                  </span>
+                ))}
+              </div>
+            </div>
+
 
             <div className='flex flex-col mt-5'>
               <label htmlFor="comment" className='font-semibold text-sm text-accent-color'>Comments</label>
