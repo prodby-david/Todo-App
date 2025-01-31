@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import TodoNav from '../components/todonav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-regular-svg-icons';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 
 const UserFeedbackForm = () => {
@@ -75,7 +75,7 @@ const UserFeedbackForm = () => {
                 {[1, 2, 3, 4, 5].map((star) => (
                   <span
                     key={star}
-                    className={`cursor-pointer text-2xl ${
+                    className={`cursor-pointer text-xl ${
                       (hover || rating) >= star ? "text-yellow-400" : "text-gray-300"
                     }`}
                     onClick={() => setRating(star)}
@@ -118,3 +118,8 @@ const UserFeedbackForm = () => {
 };
 
 export default UserFeedbackForm;
+
+
+
+
+

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navigation from '../components/navigation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 const UserFeedbackDashboard = () => {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -37,9 +39,9 @@ const UserFeedbackDashboard = () => {
                   {[1, 2, 3, 4, 5].map((star) => (
                     <span
                       key={star}
-                      className={`text-2xl ${star <= feedback.rating ? "text-yellow-400" : "text-gray-300"}`}
+                      className={`text-xl ${star <= feedback.rating ? "text-yellow-400" : "text-gray-300"}`}
                     >
-                      ★
+                      <FontAwesomeIcon icon={faStar} />
                     </span>
                   ))}
                 </div>
