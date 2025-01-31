@@ -1,14 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import Navigation from '../components/navigation';
+import TodoNav from '../components/todonav';
 
 
-const Feedback = () => {
+const UserFeedbackForm = () => {
 
+  const [name, setName] = useState('');
+  const [comment, setComment] = useState('');
   const navigate = useNavigate();
 
-  const FeedbackClicked = () => {
+  const FeedbackClicked = (e) => {
+
+    e.preventDefault();
+
+    if (!name || !comment) {
+      Swal.fire({
+        title: 'Submission failed',
+        text: 'All fields are required.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+      return; 
+    }
+
+    const feedbackList = JSON.parse(localStorage.getItem('feedbacks')) || [];
+    feedbackList.push({ name, comment });
+    localStorage.setItem('feedbacks', JSON.stringify(feedbackList));
+
     Swal.fire({
       title: 'Feedback submitted.',
       text: 'Press the button to continue.',
@@ -16,17 +35,18 @@ const Feedback = () => {
       confirmButtonText: 'Return to dashboard'
     }).then((result) => {
       if(result.isConfirmed){
-        navigate('/');
+        navigate('/dashboard');
       }
     })
+
   };
 
   return (
 
     <>
-    <Navigation />
+    <TodoNav />
 
-    <div className='flex flex-col items-center justify-center min-h-screen mt-[50px] md:mt-5 px-5'>
+    <div className='flex flex-col items-center justify-center min-h-screen px-5'>
 
       <div data-aos='fade-down' data-aos-duration='1700' data-aos-delay='1000'>
         <h2 className='font-semibold text-md md:text-base lg:text-xl text-accent-color'>Got feedback? Were all ears!</h2>
@@ -42,19 +62,9 @@ const Feedback = () => {
               type="text" 
               name="name" 
               id="name"
+              onChange={(e) => setName(e.target.value)}
               placeholder='Enter your name'
               className='text-sm mt-2 py-2 pl-2 outline-none border rounded-lg focus:border-accent-color dark:bg-darkmode-bg dark:border-darkmode-content-color dark:text-white dark:focus:border-accent-color'
-              />
-            </div>
-
-            <div className='flex flex-col mt-5'>
-              <label htmlFor="email" className='font-semibold text-sm text-accent-color'>Email</label>
-              <input 
-              type="text" 
-              name="email"
-              id="email"
-              placeholder='e.g. sample@gmail.com'
-              className='text-sm mt-2 py-2 pl-2 outline-none border rounded-lg w-full focus:border-accent-color  dark:bg-darkmode-bg dark:border-darkmode-content-color dark:text-white dark:focus:border-accent-color '
               />
             </div>
 
@@ -63,6 +73,7 @@ const Feedback = () => {
               <textarea 
               name="comment" 
               id="comment"
+              onChange={(e) => setComment(e.target.value)}
               placeholder='Enter your comments here...'
               className='mt-2 py-2 pl-2 text-sm h-40 max-h-[320px] resize-none outline-none border rounded-lg focus:border-accent-color dark:bg-darkmode-bg dark:border-darkmode-content-color dark:text-white dark:focus:border-accent-color'
               >
@@ -83,4 +94,4 @@ const Feedback = () => {
   )
 };
 
-export default Feedback;
+export default UserFeedbackForm;

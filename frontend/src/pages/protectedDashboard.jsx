@@ -107,6 +107,7 @@ const ProtectedDashboard = () => {
           await axios.delete(`http://localhost:3500/api/dashboard/${taskId}`, {withCredentials: true});
 
           const updatedTodos = todo.filter((_, i) => i !== index);
+          
           setTodo(updatedTodos);
           localStorage.setItem('todos', JSON.stringify(updatedTodos));
 
@@ -142,12 +143,14 @@ const ProtectedDashboard = () => {
         <div className='flex flex-col items-center mt-[100px]'>
 
           <div className=' text-[20px] leading-[24px] sm:text-[28px] sm:leading-[32px] md:text-[32px] md:leading-[36px] lg:text-[48px] lg:leading-[54px] text-center font-semibold'>
+
             <h2 className='dark:text-white'>Stay Focused.</h2>
             <h2 className='text-accent-color'>Get things done.</h2>
             
           </div>
 
           <div className='flex flex-col items-center w-full px-5 '>
+
             <input type="text"
             className='w-full max-w-md border p-3 outline-none mt-5 rounded-md text-sm focus:border-accent-color shadow-sm dark:bg-darkmode-bg dark:border-darkmode-content-color dark:text-white dark:focus:border-accent-color'
             maxLength={50}
@@ -155,7 +158,10 @@ const ProtectedDashboard = () => {
             name='taskField'
             onChange={(e) => setTask(e.target.value)}
             />
-            <button className='py-2 px-2 rounded-md mt-5 border border-accent-color text-white bg-accent-color active:text-accent-color active:bg-transparent opacity-80 hover:opacity-100 sm:py-3 sm:px-3 shadow-md' onClick={addTask}>Add to your todo<FontAwesomeIcon icon={faPencil} className='ml-2'/></button>
+
+            <button className='py-2 px-2 rounded-md mt-5 border border-accent-color text-white bg-accent-color active:text-accent-color active:bg-transparent opacity-80 hover:opacity-100 sm:py-3 sm:px-3 shadow-md' onClick={addTask}>
+            Add to your todo<FontAwesomeIcon icon={faPencil} className='ml-2'/>
+            </button>
             
           </div>
 

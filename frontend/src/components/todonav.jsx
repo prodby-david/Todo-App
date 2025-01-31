@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser, faGear, faCalendar, faHouse, faRightFromBracket, faArrowRightLong, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faGear, faComment, faHouse, faRightFromBracket, faArrowRightLong, faTimes } from '@fortawesome/free-solid-svg-icons';
 import DarkModeToggle from '../components/darkmodetoggle.jsx';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -66,7 +66,7 @@ const TodoNav = () => {
             </li>
 
             <li className='flex flex-col items-center hover:bg-accent-color p-5 w-full border-b' onClick={navController}>
-            <a href="" className=' text-white font-semibold'><FontAwesomeIcon icon={faCalendar} className='mr-2'/>Calendar</a>
+            <a href="/user-feedback-form" className=' text-white font-semibold'><FontAwesomeIcon icon={ faComment}  className='mr-2'/>Feedback</a>
             </li>
 
             <li className='flex flex-col items-center hover:bg-accent-color p-5 w-full border-b' onClick={navController}>

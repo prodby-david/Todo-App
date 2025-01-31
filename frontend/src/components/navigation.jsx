@@ -37,7 +37,7 @@ const Navigation = () => {
               </li>
 
               <li className='px-5 py-4 md:py-0  dark:text-white' onClick={navController}>
-                  <NavLink to='/feedback' className={({isActive}) => `${isActive ? 'text-accent-color' : ''} text-sm md:text-md md:hover:text-accent-color`}>Feedback</NavLink>
+                  <NavLink to='/feedback-dashboard' className={({isActive}) => `${isActive ? 'text-accent-color' : ''} text-sm md:text-md md:hover:text-accent-color`}>Feedbacks</NavLink>
               </li>
 
               <li className='px-5 py-4 md:py-0  dark:text-white' onClick={navController}>
