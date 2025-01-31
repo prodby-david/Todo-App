@@ -43,7 +43,7 @@ const UserFeedbackDashboard = () => {
                     </span>
                   ))}
                 </div>
-                <p className="mt-2">{feedback.comment}</p>
+                <p className="mt-2 break-words overflow-hidden text-ellipsis">{feedback.comment}</p>
               </div>
             ))}
           </div>

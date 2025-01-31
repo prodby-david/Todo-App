@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import TodoNav from '../components/todonav';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-regular-svg-icons';
 
 
 const UserFeedbackForm = () => {
 
-  const [name, setName] = useState('');
+  const [user, setUser] = useState({ firstname: '', lastname: ''});
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+
+   useEffect(() => {
+      const storedUser = JSON.parse(localStorage.getItem('user'));
+      if (storedUser) {
+        setUser(storedUser);
+      }
+    }, []);
+  
 
   const navigate = useNavigate();
 
@@ -17,7 +27,7 @@ const UserFeedbackForm = () => {
 
     e.preventDefault();
 
-    if (!name || !comment || rating === 0) {
+    if (!comment || rating === 0) {
       Swal.fire({
         title: 'Submission failed',
         text: 'All fields are required.',
@@ -28,7 +38,7 @@ const UserFeedbackForm = () => {
     }
 
     const feedbackList = JSON.parse(localStorage.getItem('feedbacks')) || [];
-    feedbackList.push({ name, rating, comment });
+    feedbackList.push({ name: `${user.firstname} ${user.lastname}`, rating, comment });
     localStorage.setItem('feedbacks', JSON.stringify(feedbackList));
 
     Swal.fire({
@@ -59,18 +69,6 @@ const UserFeedbackForm = () => {
         
           <form className="flex flex-col p-6 rounded-lg">
 
-            <div className='flex flex-col'>
-              <label htmlFor="name" className='font-semibold text-sm text-accent-color '>Name</label>
-              <input 
-              type="text" 
-              name="name" 
-              id="name"
-              onChange={(e) => setName(e.target.value)}
-              placeholder='Enter your name'
-              className='text-sm mt-2 py-2 pl-2 outline-none border rounded-lg focus:border-accent-color dark:bg-darkmode-bg dark:border-darkmode-content-color dark:text-white dark:focus:border-accent-color'
-              />
-            </div>
-
             <div className="flex flex-col mt-5">
               <label className="font-semibold text-sm text-accent-color">Rate Us</label>
               <div className="flex gap-x-5 mt-2">
@@ -84,7 +82,7 @@ const UserFeedbackForm = () => {
                     onMouseEnter={() => setHover(star)}
                     onMouseLeave={() => setHover(rating)}
                   >
-                    ★
+                    <FontAwesomeIcon icon={faStar}/>
                   </span>
                 ))}
               </div>
