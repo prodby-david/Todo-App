@@ -34,7 +34,7 @@ feedbackRouter.post('/api/user-feedback-form', authToken, async (req, res) => {
 
 feedbackRouter.get('/api/feedback-dashboard', async (req, res) => {
     try {
-      const feedbacks = await Feedback.find().populate('userId', 'firstname lastname'); 
+      const feedbacks = await Feedback.find().populate('userId', 'firstname lastname '); 
       res.status(200).json(feedbacks);
     } catch (error) {
       res.status(500).json({ message: 'Error fetching feedbacks' });

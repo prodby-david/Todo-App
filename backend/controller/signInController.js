@@ -45,6 +45,7 @@ import jwt from 'jsonwebtoken';
 
     }
     catch(err){
+        console.error('Server error:', err);
         res.status(500).json({message: 'Please try again later.'});
     }
 
