@@ -29,9 +29,7 @@ const Dashboard = () => {
         </NavLink>
 
         <NavLink to={'/signin'}>
-          <button className='mt-5 p-3 sm:p-4 text-sm md:text-md lg:text-base w-[90px] sm:w-[100px] md:w-[110px] lg:w-[120px] border border-accent-color text-accent-color relative group overflow-hidden hover:text-white'>
-          <span className="absolute inset-0 bg-accent-color transition-transform translate-x-full group-hover:translate-x-0 duration-300"></span>
-          <span className="relative z-10">Sign in</span>
+          <button className='mt-5 p-3 sm:p-4 text-sm md:text-md lg:text-base w-[90px] sm:w-[100px] md:w-[110px] lg:w-[120px] border border-accent-color text-accent-color hover:text-white hover:bg-accent-color rounded-sm'>Sign in
           </button>
         </NavLink>
       </div>

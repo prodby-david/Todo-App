@@ -13,6 +13,7 @@ import ProtectedDashboard from './pages/protectedDashboard';
 import UserFeedbackDashboard from './pages/userFeedbackDashboard';
 import UserFeedbackForm from './pages/userFeedbackForm';
 import Settings from './pages/todoSettings';
+import ErrorNotFound from './components/404error';
 
 
 
@@ -28,7 +29,8 @@ function App() {
       <AuthProvider>
         <Router>
               <Routes>
-                <Route path='/' element={<Dashboard /> } />
+                <Route path='*' element={ <ErrorNotFound/> } />
+                <Route path='/' element={ <Dashboard /> } />
                 <Route path='/about' element={ <AboutUs /> } />
                 <Route path='/feedback-dashboard' element={ < UserFeedbackDashboard /> } />
                 <Route path='/help' element={ <Help />} />

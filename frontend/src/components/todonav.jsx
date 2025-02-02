@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser, faGear, faComment, faHouse, faRightFromBracket, faArrowRightLong, faTimes } from '@fortawesome/free-solid-svg-icons';
 import DarkModeToggle from '../components/darkmodetoggle.jsx';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const TodoNav = () => {
@@ -66,11 +66,12 @@ const TodoNav = () => {
             </li>
 
             <li className='flex flex-col items-center hover:bg-accent-color p-5 w-full border-b' onClick={navController}>
-            <a href="/user-feedback-form" className=' text-white font-semibold'><FontAwesomeIcon icon={ faComment}  className='mr-2'/>Feedback</a>
+            <Link to={'/user-feedback-form'} className='text-white font-semibold'>
+            <FontAwesomeIcon icon={ faComment}  className='mr-2'/>Feedback</Link>
             </li>
 
             <li className='flex flex-col items-center hover:bg-accent-color p-5 w-full border-b' onClick={navController}>
-            <a href="/settings" className=' text-white font-semibold'><FontAwesomeIcon icon={faGear} className='mr-2'/>Settings</a>
+            <Link to={'/settings'} className='text-white font-semibold'><FontAwesomeIcon icon={faGear} className='mr-2'/>Settings</Link>
             </li>
 
             <li className='flex flex-col items-center hover:bg-accent-color p-5 w-full border-b' onClick={handleLogout}>
