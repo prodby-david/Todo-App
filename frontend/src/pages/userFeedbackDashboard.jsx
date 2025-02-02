@@ -6,8 +6,7 @@ import axios from 'axios';
 
 const UserFeedbackDashboard = () => {
 
-  const [feedbacks, setFeedbacks] = useState([]);
-  const [userId, setUserId] = useState(null);
+const [feedbacks, setFeedbacks] = useState([]);
 
   useEffect(() => {
 
@@ -22,17 +21,7 @@ const UserFeedbackDashboard = () => {
       }
     };
 
-    const fetchUser = async () => {
-      try {
-        const userResponse = await axios.get('http://localhost:3500/api/feedback-dashboard', { withCredentials: true });
-        setUserId(userResponse.data._id); 
-      } catch (error) {
-        console.error('Error fetching user:', error);
-      }
-    };
-
     fetchFeedbacks();
-    fetchUser();
   }, []);
 
   return (
@@ -66,14 +55,6 @@ const UserFeedbackDashboard = () => {
                   ))}
                 </div>
                 <p className="mt-2 break-words overflow-hidden text-ellipsis">{feedback.comment}</p>
-                {feedback.userId?._id === userId &&(
-                  <button
-                    className="text-accent-color mt-2"
-                    onClick={() => deleteFeedback(feedback._id)}
-                  >
-                    Delete
-                  </button>
-                )}
               </div>
             ))}
           </div>
@@ -85,3 +66,5 @@ const UserFeedbackDashboard = () => {
 };
 
 export default UserFeedbackDashboard;
+
+

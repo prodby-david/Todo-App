@@ -12,6 +12,7 @@ import ProtectedRoute from './components/protectedRoute';
 import ProtectedDashboard from './pages/protectedDashboard';
 import UserFeedbackDashboard from './pages/userFeedbackDashboard';
 import UserFeedbackForm from './pages/userFeedbackForm';
+import Settings from './pages/todoSettings';
 
 
 
@@ -33,7 +34,18 @@ function App() {
                 <Route path='/help' element={ <Help />} />
                 <Route path='/signup' element={ <SignUp /> }/>
                 <Route path='/signin' element={ <SignIn /> } />
-                <Route path='/user-feedback-form' element={<UserFeedbackForm />} />
+                <Route path='/user-feedback-form'
+                 element={
+                  <ProtectedRoute>
+                    <UserFeedbackForm />
+                  </ProtectedRoute>
+                } />
+                <Route path='/settings'
+                 element={
+                  <ProtectedRoute>
+                    <Settings />
+                  </ProtectedRoute>
+                } />
                 <Route path='/dashboard'
                   element={
                   <ProtectedRoute>

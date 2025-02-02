@@ -36,7 +36,7 @@ const TodoNav = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         navigate('/');
-        window.location.reload();
+        setUser(null);
       }
     });
   }
@@ -70,7 +70,7 @@ const TodoNav = () => {
             </li>
 
             <li className='flex flex-col items-center hover:bg-accent-color p-5 w-full border-b' onClick={navController}>
-            <a href="" className=' text-white font-semibold'><FontAwesomeIcon icon={faGear} className='mr-2'/>Settings</a>
+            <a href="/settings" className=' text-white font-semibold'><FontAwesomeIcon icon={faGear} className='mr-2'/>Settings</a>
             </li>
 
             <li className='flex flex-col items-center hover:bg-accent-color p-5 w-full border-b' onClick={handleLogout}>
