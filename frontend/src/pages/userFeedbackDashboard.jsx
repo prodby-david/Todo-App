@@ -7,6 +7,7 @@ import axios from 'axios';
 const UserFeedbackDashboard = () => {
 
   const [feedbacks, setFeedbacks] = useState([]);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
 
@@ -21,7 +22,17 @@ const UserFeedbackDashboard = () => {
       }
     };
 
+    const fetchUser = async () => {
+      try {
+        const userResponse = await axios.get('http://localhost:3500/api/feedback-dashboard', { withCredentials: true });
+        setUserId(userResponse.data._id); 
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+    };
+
     fetchFeedbacks();
+    fetchUser();
   }, []);
 
   return (
