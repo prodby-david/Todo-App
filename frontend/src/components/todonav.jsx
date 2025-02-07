@@ -1,24 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser, faGear, faComment, faHouse, faRightFromBracket, faArrowRightLong, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faComment, faHouse, faRightFromBracket, faArrowRightLong, faTimes, faUser } from '@fortawesome/free-solid-svg-icons';
 import DarkModeToggle from '../components/darkmodetoggle.jsx';
 import { useNavigate, Link } from 'react-router-dom';
+import { useAuthContext } from '../context/authContext.jsx';
 import Swal from 'sweetalert2';
 
 const TodoNav = () => {
 
   const [isOpen, setOpen] = useState(false);
-  const [user, setUser] = useState({ firstname: '', lastname: '', email: '' });
+  const { user } = useAuthContext();
   const navigate = useNavigate();
  
-
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (storedUser) {
-      setUser(storedUser);
-    }
-  }, []);
-
   const navController = () => {
     setOpen(false);
   }
@@ -36,7 +29,6 @@ const TodoNav = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         navigate('/');
-        setUser(null);
       }
     });
   }
@@ -62,7 +54,7 @@ const TodoNav = () => {
           <ul className='flex flex-col items-center my-auto w-full'>
 
             <li className='flex flex-col items-center hover:bg-accent-color p-5 w-full border-b border-t' onClick={navController}>
-              <a href="/dashboard" className=' text-white font-semibold'><FontAwesomeIcon icon={faHouse} className='mr-2'/>Dashboard</a>
+              <Link to={'/dashboard'} className='text-white font-semibold'><FontAwesomeIcon icon={faHouse} className='mr-2'/>Dashboard</Link>
             </li>
 
             <li className='flex flex-col items-center hover:bg-accent-color p-5 w-full border-b' onClick={navController}>
@@ -71,7 +63,7 @@ const TodoNav = () => {
             </li>
 
             <li className='flex flex-col items-center hover:bg-accent-color p-5 w-full border-b' onClick={navController}>
-            <Link to={'/settings'} className='text-white font-semibold'><FontAwesomeIcon icon={faGear} className='mr-2'/>Settings</Link>
+            <Link to={'/account'} className='text-white font-semibold'><FontAwesomeIcon icon={faUser} className='mr-2'/>Account</Link>
             </li>
 
             <li className='flex flex-col items-center hover:bg-accent-color p-5 w-full border-b' onClick={handleLogout}>

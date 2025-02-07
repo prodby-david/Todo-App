@@ -12,7 +12,7 @@ import ProtectedRoute from './components/protectedRoute';
 import ProtectedDashboard from './pages/protectedDashboard';
 import UserFeedbackDashboard from './pages/userFeedbackDashboard';
 import UserFeedbackForm from './pages/userFeedbackForm';
-import Settings from './pages/todoSettings';
+import Account from './pages/account';
 import ErrorNotFound from './components/404error';
 
 
@@ -42,10 +42,10 @@ function App() {
                     <UserFeedbackForm />
                   </ProtectedRoute>
                 } />
-                <Route path='/settings'
+                <Route path='/account'
                  element={
                   <ProtectedRoute>
-                    <Settings />
+                    <Account />
                   </ProtectedRoute>
                 } />
                 <Route path='/dashboard'

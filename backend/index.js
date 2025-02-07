@@ -7,6 +7,7 @@ import signInRouter from './routers/signInAuth.js';
 import cookieParser from 'cookie-parser';
 import TodoRouter from './routers/todoRoute.js';
 import feedbackRouter from './routers/feedbackRoute.js';
+import UpdateAccount from './routers/updateAccount.js';
 
 
 const app = express();
@@ -23,7 +24,7 @@ app.use(signUpRouter);
 app.use(signInRouter);
 app.use(TodoRouter);
 app.use(feedbackRouter);
-
+app.use(UpdateAccount);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on PORT: ${process.env.PORT}`);

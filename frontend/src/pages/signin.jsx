@@ -69,7 +69,6 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
           const login = await axios.post('http://localhost:3500/api/signin', formData, {withCredentials: true});
 
           const usersData = login.data;
-
           setUser(usersData.data);
 
           if(login.status === 200){ 
@@ -114,6 +113,14 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
           }
         }  
     }
+
+    useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        navigate('/dashboard'); 
+      }
+    }, []);
+    
 
 
     return (
