@@ -227,7 +227,7 @@ const handleChange = (e) => {
           }
           className='mr-2 cursor-pointer'
           />
-          <label htmlFor="checkbox" className='text-xs sm:text-sm md:text-md dark:text-white'>I accept the <a href="/" className='text-accent-color hover:underline'>Terms and Conditions</a></label>
+          <label htmlFor="checkbox" className='text-xs sm:text-sm md:text-md dark:text-white'>I accept the <a href="/terms" className='text-accent-color hover:underline'>Terms and Conditions</a></label>
         </div>
 
           <div className='mt-3'>

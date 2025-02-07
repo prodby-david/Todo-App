@@ -14,6 +14,7 @@ import UserFeedbackDashboard from './pages/userFeedbackDashboard';
 import UserFeedbackForm from './pages/userFeedbackForm';
 import Account from './pages/account';
 import ErrorNotFound from './components/404error';
+import TermsAndCondition from './pages/terms';
 
 
 
@@ -35,6 +36,7 @@ function App() {
                 <Route path='/feedback-dashboard' element={ < UserFeedbackDashboard /> } />
                 <Route path='/help' element={ <Help />} />
                 <Route path='/signup' element={ <SignUp /> }/>
+                <Route path='/terms' element={<TermsAndCondition />}/>
                 <Route path='/signin' element={ <SignIn /> } />
                 <Route path='/user-feedback-form'
                  element={
